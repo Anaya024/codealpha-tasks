@@ -1,0 +1,368 @@
+/* Body styles */  
+body {  
+  font-family: 'Poppins', sans-serif;  
+  background: linear-gradient(135deg, #74ebd5, #ACB6E5);  
+  min-height: 100vh;  
+  margin: 0;  
+  padding: 20px;  
+  color: #444;  
+}  
+
+/* Heading for the library, with a clean, attractive style */  
+h1 {  
+  text-align: center;  
+  margin-bottom: 30px;  
+  font-size: 2.8em;  
+  font-weight: 700;  
+  color: #2c3e50; /* Dark slate color for professionalism */  
+  position: relative;  
+  display: inline-block;  
+  padding-left: 50px;  
+}  
+
+/* Adding an icon before heading */  
+h1::before {  
+  content: "\f02d"; /* Font Awesome book icon */  
+  font-family: "Font Awesome 6 Free";  
+  font-weight: 900;  
+  font-size: 2em;  
+  position: absolute;  
+  left: 0;  
+  top: 50%;  
+  transform: translateY(-50%);  
+  color: #2980b9; /* Soft blue icon color */  
+}  
+
+/* Container for form/search/filter sections */  
+#form-container,  
+#search-container {  
+  display: flex;  
+  flex-wrap: wrap;  
+  justify-content: center;  
+  align-items: center;  
+  gap: 15px;  
+  margin-bottom: 30px;  
+  padding: 10px;  
+}  
+
+/* Inputs and dropdowns styling */  
+input[type="text"], select {  
+  padding: 12px 16px;  
+  border-radius: 8px;  
+  border: none;  
+  outline: none;  
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);  
+  font-size: 1em;  
+  width: 200px;  
+}  
+
+/* Buttons with gradient background and icons */  
+button {  
+  padding: 12px 20px;  
+  background: linear-gradient(45deg, #06beb6, #48b1bf);  
+  border: none;  
+  border-radius: 8px;  
+  color: #fff;  
+  font-size: 1em;  
+  cursor: pointer;  
+  transition: all 0.3s ease;  
+  display: flex;  
+  align-items: center;  
+}  
+
+button:hover {  
+  background: linear-gradient(45deg, #048899, #368b9f);  
+}  
+
+button i {  
+  margin-right: 8px;  
+  font-family: "Font Awesome 6 Free";  
+}  
+
+/* Book list styles */  
+#books {  
+  list-style: none;  
+  padding: 0;  
+  max-width: 900px;  
+  margin: 0 auto;  
+}  
+
+/* Book card */  
+.book {  
+  background: #fff;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  padding: 20px;  
+  margin-bottom: 12px;  
+  border-radius: 12px;  
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);  
+  transition: transform 0.2s, box-shadow 0.2s;  
+}  
+
+.book:hover {  
+  transform: translateY(-2px);  
+  box-shadow: 0 12px 20px rgba(0,0,0,0.2);  
+}  
+
+/* Book info details */  
+.book-info {  
+  display: flex;  
+  flex-direction: column;  
+}  
+
+.book-title {  
+  font-size: 1.3em;  
+  font-weight: 700;  
+  color: #333;  
+}  
+
+.book-details {  
+  font-size: 1em;  
+  color: #555;  
+  margin-top: 4px;  
+}  
+
+/* Status badges for book status */  
+.status {  
+  font-weight: 600;  
+  font-size: 1.1em;  
+  padding: 4px 8px;  
+  border-radius: 12px;  
+  color: #fff;  
+}  
+.status.borrowed {  
+  background-color: #e74c3c; /* red for borrowed */  
+}  
+.status.available {  
+  background-color: #27ae60; /* green for available */  
+}  
+
+/* Action buttons for borrow/return */  
+/* Action buttons for borrow/return */
+.btn-action button {
+  margin-left: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s; /* Added 's' for seconds */
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: #fff;
+}
+.btn-action button:hover {
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+}
+
+/* Borrowing History Section */
+#history {
+  max-width: 900px;
+  margin: 40px auto;
+  background: linear-gradient(135deg, #f7d7e8, #ffe2e2);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+#history h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #444;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Icon in the header of history */
+#history h2 i {
+  margin-right: 12px;
+  color: #e74c3c;
+  font-size: 1.8em;
+}
+
+/* List inside history */
+#history ul {
+  padding: 0;
+  margin: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+#history li {
+  background: #fff;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+/* Icon in each history item */
+#history li i {
+  margin-right: 10px;
+  color: #f39c12;
+}
+/* Container for category select with icon */
+#search-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+/* Wrapper for category icon and select */
+#category-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Icon inside category wrapper */
+#category-wrapper i {
+  position: absolute;
+  left: 12px;
+  font-size: 1.2em;
+  color: #666;
+  pointer-events: none;
+}
+
+/* Category select styling */
+#category {
+  padding-left: 40px; /* space for icon */
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-size: 1em;
+  outline: none;
+  width: 220px;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+    padding-left: 40px; /* Adjust for smaller screens if needed */
+  }
+
+  #form-container,
+  #search-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #category {
+    width: 180px;
+  }
+
+  #search {
+    width: 180px;
+  }
+
+  #books {
+    padding: 10px;
+  }
+}
+/* --------- Existing Styles (from previous responses) --------- */
+/* (Note: Insert the full existing styles here if needed) */
+
+/* ----------------------------------------------
+Scrollbar Styling 
+---------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* For Firefox
+scrollbar-width: thin;
+scrollbar-color: #888 #f1f1f1; */
+
+/* ----------------------------------------------
+Notification Styles (for success and error messages)
+---------------------------------------------- */
+#notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 250px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-weight: 600;
+  font-size: 1em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+#notification.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+#notification.success {
+  background-color: #27ae60;
+  color: #fff;
+}
+
+#notification.error {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+/* ----------------------------------------------
+Animations for fade-in and slide-in effects
+---------------------------------------------- */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation to elements with class 'animate-fade-slide' */
+.animate-fade-slide {
+  animation: fadeInSlide 0.5s ease-out forwards;
+}
+
+/* ----------------------------------------------
+Optional: Additional subtle hover effects for buttons, cards, etc.
+---------------------------------------------- */
+.book {
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+.book:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+  background-color: #f9f9f9; /* slight background change on hover */
+}
