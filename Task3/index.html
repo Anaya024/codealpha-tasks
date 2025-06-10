@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book Library</title>
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1><i class="fas fa-book"></i> My Book Library</h1>
+
+<!-- Add Book Form -->
+<div id="form-container">
+  <input type="text" id="title" placeholder="Title" />
+  <input type="text" id="author" placeholder="Author" />
+  <input type="text" id="category" placeholder="Category" />
+  <button onclick="addBook()"><i class="fas fa-plus"></i> Add Book</button>
+</div>
+
+<!-- Search & Filter -->
+<div id="search-container">
+  <input type="text" placeholder="Search books..." oninput="renderBooks()" id="search" />
+  <select id="categoryFilter" onchange="renderBooks()">
+    <option value="All">All Categories</option>
+  </select>
+</div>
+
+
+<!-- Book list -->
+<ul id="books"></ul>
+
+<!-- Borrow History -->
+<div id="history">
+  <h2><i class="fas fa-history"></i> Borrowing History</h2>
+  <ul id="history-list"></ul>
+</div>
+
+<script>
+  const books = [];
+  const historyLog = [];
+
+  function addBook() {
+    const title = document.getElementById('title').value.trim();
+    const author = document.getElementById('author').value.trim();
+    const category = document.getElementById('category').value.trim();
+    if (!title || !author || !category) {
+      alert('Please fill all fields');
+      return;
+    }
+    const book = {
+      id: Date.now(),
+      title,
+      author,
+      category,
+      borrowed: false,
+    };
+    books.push(book);
+    addCategory(category);
+    renderBooks();
+    document.getElementById('title').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('category').value = '';
+  }
+
+  function addCategory(cat) {
+    const select = document.getElementById('categoryFilter');
+    const exists = [...select.options].some(o => o.value === cat);
+    if (!exists && cat !== 'All') {
+      const option = document.createElement('option');
+      option.value = cat;
+      option.textContent = cat;
+      select.appendChild(option);
+    }
+  }
+
+  function toggleBorrow(id) {
+    const book = books.find(b => b.id === id);
+    if (book) {
+      book.borrowed = !book.borrowed;
+      // Log history
+      const record = {
+        id,
+        title: book.title,
+        action: book.borrowed ? 'Borrowed' : 'Returned',
+        date: new Date().toLocaleString(),
+      };
+      historyLog.push(record);
+      updateHistory();
+      renderBooks();
+    }
+  }
+
+  function renderBooks() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const categoryFilter = document.getElementById('categoryFilter').value;
+
+    const list = document.getElementById('books');
+    list.innerHTML = '';
+
+    const filtered = books.filter(b => {
+      const matchesSearch = b.title.toLowerCase().includes(searchTerm) || b.author.toLowerCase().includes(searchTerm);
+      const matchesCategory = (categoryFilter === 'All') || (b.category === categoryFilter);
+      return matchesSearch && matchesCategory;
+    });
+
+    filtered.forEach(book => {
+      const li = document.createElement('li');
+      li.className = 'book';
+      li.innerHTML = `
+        <div class="book-info">
+          <div class="book-title">${book.title}</div>
+          <div class="book-details">by ${book.author} | ${book.category}</div>
+        </div>
+        <div class="btn-action">
+          <span class="status" style="color:${book.borrowed ? 'red' : 'green'};">${book.borrowed ? 'Borrowed' : 'Available'}</span>
+          <button onclick="toggleBorrow(${book.id})">
+            <i class="fas fa-book-${book.borrowed ? 'return' : 'open'}"></i> ${book.borrowed ? 'Return' : 'Borrow'}
+          </button>
+        </div>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  function updateHistory() {
+    const list = document.getElementById('history-list');
+    list.innerHTML = '';
+    for (let i=historyLog.length-1; i>=0; i--) {
+      const rec = historyLog[i];
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <strong>${rec.title}</strong> - ${rec.action} on ${rec.date}
+      `;
+      list.appendChild(li);
+    }
+  }
+</script>
+</body>
+</html>
